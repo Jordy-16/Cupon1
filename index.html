@@ -53,38 +53,6 @@
     100% { transform: translateY(-120vh); }
   }
 
-  /* Pantalla de espera */
-  .countdown {
-    background: #fff;
-    border-radius: 16px;
-    padding: 20px;
-    width: 85%;
-    max-width: 380px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
-    text-align: center;
-    z-index: 2;
-  }
-  .waiting-icon {
-    font-size: 45px;
-    margin: 10px;
-    animation: bounce 2s infinite;
-  }
-  @keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  .countdown h1 {
-    color: #d6336c;
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  .time {
-    font-size: 20px;
-    font-weight: 700;
-    color: #d6336c;
-    margin: 10px 0;
-  }
-
   /* Cupón 3D */
   .coupon {
     background: linear-gradient(145deg, #fff, #ffeaf1);
@@ -172,8 +140,6 @@
   .btn:hover {
     transform: scale(1.08);
   }
-
-  .hidden { display: none; }
 </style>
 </head>
 <body>
@@ -182,16 +148,8 @@
   <div class="balloon"></div>
   <div class="balloon"></div>
 
-  <!-- Pantalla de espera -->
-  <div id="lock" class="countdown">
-    <div class="waiting-icon">🎈</div>
-    <h1>Se desbloquea el <span id="fecha"></span></h1>
-    <div class="time" id="timer">--:--:--:--</div>
-    <p>¡Los globos ya están listos para tu sorpresa! 🎉</p>
-  </div>
-
-  <!-- Cupón -->
-  <div id="coupon" class="coupon hidden">
+  <!-- Cupón (ya desbloqueado) -->
+  <div id="coupon" class="coupon">
     <div class="sticker">🎉 VIP</div>
     <h2>¡Regalo Especial para Ti!</h2>
     <p>Tu día merece algo más que un simple cupón...</p>
@@ -199,36 +157,5 @@
     <p>Disfruta tu obsequio como más te guste 💝</p>
   </div>
 
-<script>
-  // Fecha objetivo: mañana a la 1:00 a.m.
-  const now = new Date();
-  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 1, 0, 0);
-
-  // Mostrar la fecha de desbloqueo
-  document.getElementById("fecha").textContent = target.toLocaleDateString(undefined, {
-    day: '2-digit', month: 'long', year: 'numeric'
-  });
-
-  function update(){
-    const now = new Date();
-    const diff = target - now;
-
-    if(diff <= 0){
-      document.getElementById("lock").classList.add("hidden");
-      document.getElementById("coupon").classList.remove("hidden");
-      return;
-    }
-
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-
-    document.getElementById("timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
-  }
-
-  update();
-  setInterval(update, 1000);
-</script>
 </body>
 </html>
