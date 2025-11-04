@@ -3,75 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cupón 1</title>
+<title>Cupón Especial</title>
 <style>
-  body{
-    margin:0;font-family:"Poppins",sans-serif;
-    background:linear-gradient(135deg,#ffe0eb,#fff8fb);
-    display:flex;align-items:center;justify-content:center;flex-direction:column;
-    min-height:100vh;overflow:hidden;
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #ffe0eb, #fff8fb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    perspective: 1000px;
   }
+
   /* Globos animados */
-  .balloon{position:absolute;bottom:-120px;width:60px;height:80px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,#ff8fb2,#e05578);animation:float 12s infinite ease-in;opacity:0.8;}
-  .balloon:after{content:"";position:absolute;bottom:-15px;left:50%;width:2px;height:15px;background:#444;}
-  .balloon:nth-child(2){left:20%;animation-duration:9s;background:radial-gradient(circle at 30% 30%,#ffd6a5,#ff9f1c);}
-  .balloon:nth-child(3){left:70%;animation-duration:14s;background:radial-gradient(circle at 30% 30%,#a0e7e5,#00b4d8);}
-  @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-120vh);}}
-  .hidden{display:none;}
+  .balloon {
+    position: absolute;
+    bottom: -120px;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff8fb2, #e05578);
+    animation: float 12s infinite ease-in;
+    opacity: 0.8;
+  }
+  .balloon:after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: #444;
+  }
+  .balloon:nth-child(2) {
+    left: 20%;
+    animation-duration: 9s;
+    background: radial-gradient(circle at 30% 30%, #ffd6a5, #ff9f1c);
+  }
+  .balloon:nth-child(3) {
+    left: 70%;
+    animation-duration: 14s;
+    background: radial-gradient(circle at 30% 30%, #a0e7e5, #00b4d8);
+  }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120vh); }
+  }
 
   /* Pantalla de espera */
-  .countdown{
-    background:#fff;border-radius:16px;padding:20px;width:85%;max-width:380px;
-    box-shadow:0 6px 20px rgba(0,0,0,.2);text-align:center;z-index:2;
+  .countdown {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 85%;
+    max-width: 380px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+    text-align: center;
+    z-index: 2;
   }
-  .waiting-icon{font-size:45px;margin:10px;animation:bounce 2s infinite;}
-  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-  .countdown h1{color:#d6336c;font-size:18px;margin:10px 0;}
-  .time{font-size:20px;font-weight:700;color:#d6336c;margin:10px 0;}
+  .waiting-icon {
+    font-size: 45px;
+    margin: 10px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .countdown h1 {
+    color: #d6336c;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  .time {
+    font-size: 20px;
+    font-weight: 700;
+    color: #d6336c;
+    margin: 10px 0;
+  }
 
-  /* Cupón */
-  .coupon{
-    background:#fff;border:3px dashed #ff8fb2;border-radius:18px;padding:20px;width:85%;max-width:380px;
-    text-align:center;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.15);
+  /* Cupón 3D */
+  .coupon {
+    background: linear-gradient(145deg, #fff, #ffeaf1);
+    border: 2px dashed #ff8fb2;
+    border-radius: 20px;
+    padding: 25px;
+    width: 85%;
+    max-width: 380px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15),
+                inset 0 1px 10px rgba(255,255,255,0.4);
+    transform-style: preserve-3d;
+    animation: floatCard 4s ease-in-out infinite;
   }
-  .coupon h2{color:#d6336c;font-size:22px;margin:10px 0;}
-  .coupon .value{font-size:34px;font-weight:900;color:#ff4d6d;margin:15px 0;}
-  .sticker{position:absolute;top:-20px;right:-20px;background:#ff4d6d;color:#fff;
-    padding:12px;border-radius:50%;font-weight:700;font-size:12px;transform:rotate(15deg);}
+
+  @keyframes floatCard {
+    0%, 100% { transform: rotateY(0deg) translateY(0px); }
+    50% { transform: rotateY(5deg) translateY(-10px); }
+  }
+
+  /* Reflejo brillante */
+  .coupon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+    transform: skewX(-25deg);
+    animation: shine 3.5s infinite;
+  }
+  @keyframes shine {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
+
+  .coupon h2 {
+    color: #d6336c;
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .coupon p {
+    color: #555;
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  .value {
+    font-size: 32px;
+    font-weight: 900;
+    color: #ff4d6d;
+    margin: 15px 0;
+    text-shadow: 0 2px 10px rgba(255,77,109,0.3);
+  }
+
+  .sticker {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: #ff4d6d;
+    color: #fff;
+    padding: 14px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 12px;
+    transform: rotate(15deg);
+    box-shadow: 0 4px 10px rgba(255,0,100,0.4);
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: #ff4d6d;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(255,77,109,0.4);
+    transition: transform 0.2s;
+  }
+  .btn:hover {
+    transform: scale(1.08);
+  }
+
+  .hidden { display: none; }
 </style>
 </head>
 <body>
-  <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 
-  <!-- Espera -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- Pantalla de espera -->
   <div id="lock" class="countdown">
     <div class="waiting-icon">🎈</div>
     <h1>Se desbloquea el <span id="fecha"></span></h1>
     <div class="time" id="timer">--:--:--:--</div>
-    <p>¡Los globos ya están listos para tu día! 🎉</p>
+    <p>¡Los globos ya están listos para tu sorpresa! 🎉</p>
   </div>
 
   <!-- Cupón -->
   <div id="coupon" class="coupon hidden">
-    <div class="sticker">VIP</div>
-    <h2>🎂 ¡Cupón de Cumpleaños!</h2>
-    <p>Endulza tu día especial con este regalo</p>
-    <div class="value">$25</div>
-    <p>Canjéalo en tiendas asociadas 💝</p>
+    <div class="sticker">🎉 VIP</div>
+    <h2>¡Regalo Especial para Ti!</h2>
+    <p>Tu día merece algo más que un simple cupón...</p>
+    <div class="value">🎁 Compra donde quieras</div>
+    <p>Disfruta tu obsequio como más te guste 💝</p>
   </div>
 
 <script>
-  function getTargetDate(offset){const now=new Date();return new Date(now.getFullYear(),now.getMonth()+offset,4,0,0,0);}
-  const target=getTargetDate(1);
-  document.getElementById("fecha").textContent=target.toLocaleDateString(undefined,{day:'2-digit',month:'long',year:'numeric'});
+  // Fecha objetivo: mañana a la 1:00 a.m.
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 1, 0, 0);
+
+  // Mostrar la fecha de desbloqueo
+  document.getElementById("fecha").textContent = target.toLocaleDateString(undefined, {
+    day: '2-digit', month: 'long', year: 'numeric'
+  });
+
   function update(){
-    const now=new Date(),diff=target-now;
-    if(diff<=0){lock.classList.add("hidden");coupon.classList.remove("hidden");return;}
-    const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-    timer.textContent=`${d}d ${h}h ${m}m ${s}s`;
+    const now = new Date();
+    const diff = target - now;
+
+    if(diff <= 0){
+      document.getElementById("lock").classList.add("hidden");
+      document.getElementById("coupon").classList.remove("hidden");
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById("timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
   }
-  update();setInterval(update,1000);
+
+  update();
+  setInterval(update, 1000);
 </script>
 </body>
 </html>
